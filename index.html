@@ -67,7 +67,18 @@
     margin-top: 2px;
   }
   .header-actions { display: flex; gap: 8px; }
-  .btn-icon {
+  .btn-icon-dim {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.3);
+    padding: 6px 8px;
+    font-size: 10px;
+    cursor: pointer;
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .btn-icon-dim:hover { color: rgba(255,255,255,0.6); }
     background: rgba(255,255,255,0.1);
     border: 1px solid rgba(255,255,255,0.2);
     color: var(--paper);
@@ -615,7 +626,7 @@
     <h1>問 診 表</h1>
   </div>
   <div class="header-actions">
-    <button class="btn-icon" onclick="openQRModal()">🔗 QR</button>
+    <button class="btn-icon-dim" onclick="openQRModal()" title="管理者：QR・共有設定">QR</button>
     <button class="btn-icon" onclick="openSaveModal()">💾 保存</button>
     <button class="btn-icon" onclick="openLoadModal()">📂 読込</button>
   </div>
@@ -1039,16 +1050,37 @@
   <div class="modal">
     <h2>📂 データ管理</h2>
 
-    <!-- JSONファイル読み込み -->
-    <div class="section" style="margin-bottom:14px">
-      <div class="section-header"><span class="section-icon">📤</span><span class="section-title">JSONファイルを読み込む（患者から受け取ったファイル）</span></div>
-      <div class="section-body">
-        <p style="font-size:12px;color:var(--ink-light);margin-bottom:12px">患者さんからLINE等で受け取ったJSONファイルを選択してください。</p>
+    <!-- 保存済みリスト -->
+    <div style="font-size:12px;color:var(--ink-light);margin-bottom:8px;font-weight:500">保存済みデータ</div>
+    <div class="saved-list" id="saved-list"></div>
+
+    <!-- 患者向けメインアクション：JSON出力を大きく目立たせる -->
+    <div style="margin-top:16px;padding:16px;background:var(--green-light);border:1.5px solid var(--green);border-radius:12px;text-align:center">
+      <div style="font-size:12px;color:var(--green);font-weight:500;margin-bottom:10px">📋 記入が終わったら治療院へ送信</div>
+      <button onclick="exportJSON()" style="width:100%;padding:14px;background:var(--green);color:white;border:none;border-radius:10px;font-family:'Noto Sans JP',sans-serif;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.05em;">
+        📥 JSONファイルを出力する
+      </button>
+      <div style="font-size:11px;color:var(--green);margin-top:8px;opacity:0.8">出力したファイルをLINEで治療院へ送ってください</div>
+    </div>
+
+    <div class="modal-actions" style="margin-top:12px">
+      <button class="btn-close-modal" onclick="closeModal('load-modal')">閉じる</button>
+      <button class="btn-print" onclick="printPDF()">🖨️ PDF印刷</button>
+    </div>
+
+    <!-- 管理者向け：折りたたみ式で下部に配置 -->
+    <div style="margin-top:20px;border-top:1px dashed var(--border);padding-top:14px">
+      <button onclick="toggleAdminSection()" style="width:100%;background:none;border:none;font-family:'Noto Sans JP',sans-serif;font-size:11px;color:var(--ink-light);cursor:pointer;text-align:left;padding:0;display:flex;align-items:center;gap:6px">
+        <span id="admin-toggle-icon">▶</span>
+        <span>管理者メニュー（JSONファイルの読み込み）</span>
+      </button>
+      <div id="admin-section" style="display:none;margin-top:12px">
+        <p style="font-size:12px;color:var(--ink-light);margin-bottom:10px">患者さんから受け取ったJSONファイルを読み込んでフォームに反映します。</p>
         <label for="json-file-input" style="display:block">
-          <div id="file-drop-zone" style="border:2px dashed var(--border);border-radius:8px;padding:20px;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--paper)">
-            <div style="font-size:24px;margin-bottom:6px">📁</div>
+          <div id="file-drop-zone" style="border:2px dashed var(--border);border-radius:8px;padding:16px;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--paper)">
+            <div style="font-size:20px;margin-bottom:4px">📁</div>
             <div style="font-size:13px;color:var(--ink-light)">タップしてJSONファイルを選択</div>
-            <div style="font-size:11px;color:var(--accent-light);margin-top:4px">問診データ_YYYY-MM-DD.json</div>
+            <div style="font-size:11px;color:var(--accent-light);margin-top:3px">問診データ_YYYY-MM-DD.json</div>
           </div>
         </label>
         <input type="file" id="json-file-input" accept=".json" style="display:none" onchange="importJSONFile(this)">
@@ -1056,15 +1088,6 @@
       </div>
     </div>
 
-    <!-- 保存済みリスト -->
-    <div style="font-size:12px;color:var(--ink-light);margin-bottom:8px;font-weight:500">このブラウザの保存済みデータ</div>
-    <div class="saved-list" id="saved-list"></div>
-
-    <div class="modal-actions" style="margin-top:12px">
-      <button class="btn-close-modal" onclick="closeModal('load-modal')">閉じる</button>
-      <button class="btn-print" onclick="printPDF()">🖨️ PDF印刷</button>
-      <button class="btn-download" onclick="exportJSON()">📥 JSON出力</button>
-    </div>
   </div>
 </div>
 
@@ -1506,6 +1529,14 @@ function showToast(msg) {
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function toggleAdminSection() {
+  const section = document.getElementById('admin-section');
+  const icon = document.getElementById('admin-toggle-icon');
+  const isOpen = section.style.display !== 'none';
+  section.style.display = isOpen ? 'none' : 'block';
+  icon.textContent = isOpen ? '▶' : '▼';
 }
 
 // ===== JSON FILE IMPORT =====
