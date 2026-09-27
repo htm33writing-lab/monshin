@@ -1155,8 +1155,9 @@
     </button>
     <div style="display:flex;gap:8px;margin-bottom:10px">
       <button onclick="sendLinkViaLINE()" style="flex:1;padding:11px;background:#06C755;color:white;border:none;border-radius:8px;font-family:'Noto Sans JP',sans-serif;font-size:13px;font-weight:700;cursor:pointer">LINEで送る</button>
-      <button onclick="copyLink()" style="flex:1;padding:11px;background:var(--paper-warm);color:var(--ink);border:1px solid var(--border);border-radius:8px;font-family:'Noto Sans JP',sans-serif;font-size:13px;font-weight:700;cursor:pointer">🔗 リンクをコピー</button>
+      <button onclick="sendLinkViaMessenger()" style="flex:1;padding:11px;background:#0084FF;color:white;border:none;border-radius:8px;font-family:'Noto Sans JP',sans-serif;font-size:13px;font-weight:700;cursor:pointer">Messengerで送る</button>
     </div>
+    <button onclick="copyLink()" style="width:100%;padding:10px;background:var(--paper-warm);color:var(--ink);border:1px solid var(--border);border-radius:8px;font-family:'Noto Sans JP',sans-serif;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:10px">🔗 リンクをコピー</button>
     <div style="font-size:11px;color:var(--ink-light);text-align:center;line-height:1.7;margin-bottom:16px">
       リンクには記入内容が含まれます。治療院以外には送らないでください。<br>
       うまく送れない場合は <a href="#" onclick="exportJSONFromComplete();return false" style="color:var(--ink-light)">JSONファイルで出力</a>
@@ -1190,6 +1191,10 @@
       <button onclick="shareLink()" style="width:100%;padding:14px;background:var(--green);color:white;border:none;border-radius:10px;font-family:'Noto Sans JP',sans-serif;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.05em;">
         📤 治療院へ送る
       </button>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button onclick="sendLinkViaLINE()" style="flex:1;padding:9px;background:#06C755;color:white;border:none;border-radius:8px;font-family:'Noto Sans JP',sans-serif;font-size:12px;font-weight:700;cursor:pointer">LINEで送る</button>
+        <button onclick="sendLinkViaMessenger()" style="flex:1;padding:9px;background:#0084FF;color:white;border:none;border-radius:8px;font-family:'Noto Sans JP',sans-serif;font-size:12px;font-weight:700;cursor:pointer">Messengerで送る</button>
+      </div>
       <div style="font-size:11px;color:var(--green);margin-top:8px;opacity:0.8">
         今の記入内容をリンクにして、LINEやMessengerで送ります<br>
         <a href="#" onclick="exportJSON();return false" style="color:var(--green)">JSONファイルで出力する</a>
@@ -1859,13 +1864,23 @@ async function sendLinkViaLINE() {
   location.href = 'https://line.me/R/msg/text/?' + encodeURIComponent(shareMessage(link) + '\n' + link.url);
 }
 
+// Messengerには文章入りで開く仕組みがないため、先にコピーしてからアプリの共有画面を開く
+async function sendLinkViaMessenger() {
+  const link = await buildShareLink();
+  if (!link) return;
+  await copyText(shareMessage(link) + '\n' + link.url, '📋 コピーしました。Messengerで送り先を選び、貼り付けて送ってください');
+  if (/iPhone|iPad|Android/i.test(navigator.userAgent)) {
+    setTimeout(() => { location.href = 'fb-messenger://share/?link=' + encodeURIComponent(link.url); }, 400);
+  }
+}
+
 async function copyLink() {
   const link = await buildShareLink();
   if (!link) return;
   await copyText(shareMessage(link) + '\n' + link.url);
 }
 
-async function copyText(text) {
+async function copyText(text, msg) {
   try {
     await navigator.clipboard.writeText(text);
   } catch (e) {
@@ -1876,7 +1891,7 @@ async function copyText(text) {
     document.execCommand('copy');
     ta.remove();
   }
-  showToast('📋 コピーしました。LINEやMessengerに貼り付けて送ってください');
+  showToast(msg || '📋 コピーしました。LINEやMessengerに貼り付けて送ってください');
 }
 
 function clearForm() {
