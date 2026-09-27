@@ -712,12 +712,12 @@
       <div class="field">
         <label>毎日意識して摂っている食品（複数選択可）</label>
         <div class="check-group" id="daily-foods-group">
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="コーヒー">コーヒー</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="紅茶">紅茶</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="緑茶">緑茶</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="甘い飲み物">甘い飲み物</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="ヨーグルト">ヨーグルト</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="納豆">納豆</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="コーヒー">コーヒー</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="紅茶">紅茶</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="緑茶">緑茶</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="甘い飲み物">甘い飲み物</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="ヨーグルト">ヨーグルト</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="納豆">納豆</label>
         </div>
         <input type="text" id="daily_foods_other" placeholder="その他（食品名、サプリ名など）" style="margin-top:8px" oninput="autoSave()">
       </div>
@@ -752,11 +752,11 @@
     <div class="section-body">
       <div class="field">
         <div class="check-group" id="referral-group">
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="SNS（Facebook・Instagram）">SNS（Facebook・Instagram）</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="Webページ">Webページ</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="Web広告">Web広告</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="口コミ">口コミ</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="家族・知人紹介">家族・知人紹介</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="SNS（Facebook・Instagram）">SNS（Facebook・Instagram）</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="Webページ">Webページ</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="Web広告">Web広告</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="口コミ">口コミ</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="家族・知人紹介">家族・知人紹介</label>
         </div>
         <input type="text" id="referral_other" placeholder="その他" style="margin-top:8px" oninput="autoSave()">
       </div>
@@ -896,13 +896,13 @@
       <div class="field">
         <label>反応の内容（当てはまるものをすべて選択）</label>
         <div class="check-group" id="acup-reaction-group">
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="疲れる">疲れる</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="眠くなる">眠くなる</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="だるくなる">だるくなる</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="気分が高揚">気分が高揚</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="症状が楽に">症状が楽に</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="安心する">安心する</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="症状が悪化">症状が悪化</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="疲れる">疲れる</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="眠くなる">眠くなる</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="だるくなる">だるくなる</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="気分が高揚">気分が高揚</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="症状が楽に">症状が楽に</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="安心する">安心する</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="症状が悪化">症状が悪化</label>
         </div>
       </div>
       <div class="field">
@@ -1002,10 +1002,10 @@
       <div class="field">
         <label>受けたことのある治療（複数選択可）</label>
         <div class="check-group" id="dental-history-group">
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="歯の矯正">歯の矯正</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="顎の矯正">顎の矯正</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="顎関節症の治療">顎関節症の治療</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="インプラント">インプラント</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="歯の矯正">歯の矯正</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="顎の矯正">顎の矯正</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="顎関節症の治療">顎関節症の治療</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="インプラント">インプラント</label>
         </div>
       </div>
     </div>
@@ -1068,9 +1068,9 @@
       <div class="field">
         <label>出産ありの方のみ：分娩方法（複数選択可）</label>
         <div class="check-group" id="delivery-group">
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="自然分娩">自然分娩</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="無痛分娩">無痛分娩</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="帝王切開">帝王切開</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="自然分娩">自然分娩</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="無痛分娩">無痛分娩</label>
+          <label class="check-label" onclick="toggleCheck(this, event)"><input type="checkbox" value="帝王切開">帝王切開</label>
         </div>
       </div>
 
@@ -1393,7 +1393,9 @@ function selectRadio(el, name, value) {
   autoSave();
 }
 
-function toggleCheck(el) {
+function toggleCheck(el, e) {
+  // label内のチェックボックスにもクリックが伝わり2回呼ばれるため、そちら側は無視する
+  if (e && e.target.tagName === 'INPUT') return;
   el.classList.toggle('selected');
   autoSave();
 }
