@@ -1145,45 +1145,21 @@
       <div style="font-size:48px;margin-bottom:10px">✅</div>
       <h2 style="font-size:20px;margin-bottom:6px">記入が完了しました！</h2>
       <p style="font-size:13px;color:var(--ink-light);line-height:1.7">
-        次のステップでファイルを出力して<br>治療院へ送信してください
+        下のボタンから、LINEやMessengerで<br>治療院へ送信してください
       </p>
     </div>
 
-    <!-- ステップ -->
-    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
-
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--paper-warm);border-radius:10px;border:1px solid var(--border)">
-        <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">1</div>
-        <div>
-          <div style="font-size:13px;font-weight:700;margin-bottom:2px">下のボタンでファイルを出力</div>
-          <div style="font-size:12px;color:var(--ink-light)">「📥 JSONファイルを出力する」をタップすると、ファイルが作成されます</div>
-        </div>
-      </div>
-
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--paper-warm);border-radius:10px;border:1px solid var(--border)">
-        <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">2</div>
-        <div>
-          <div style="font-size:13px;font-weight:700;margin-bottom:2px">「ダウンロード」をタップして保存</div>
-          <div style="font-size:12px;color:var(--ink-light)">iPhoneの場合、確認画面が出たら「ダウンロード」を選んでください</div>
-        </div>
-      </div>
-
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--paper-warm);border-radius:10px;border:1px solid var(--border)">
-        <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">3</div>
-        <div>
-          <div style="font-size:13px;font-weight:700;margin-bottom:2px">LINEで治療院へ送信</div>
-          <div style="font-size:12px;color:var(--ink-light)">LINEを開いて「＋」→「ファイル」→ ダウンロードしたファイルを選んで送信</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- メインボタン：JSON出力 -->
-    <button onclick="exportJSONFromComplete()" style="width:100%;padding:16px;background:var(--green);color:white;border:none;border-radius:12px;font-family:'Noto Sans JP',sans-serif;font-size:17px;font-weight:700;cursor:pointer;letter-spacing:0.05em;margin-bottom:10px;box-shadow:0 4px 14px rgba(74,124,107,0.35)">
-      📥 JSONファイルを出力する
+    <!-- メインボタン：リンクで送信 -->
+    <button class="send-link-btn" onclick="shareLink()" style="width:100%;padding:16px;background:var(--green);color:white;border:none;border-radius:12px;font-family:'Noto Sans JP',sans-serif;font-size:17px;font-weight:700;cursor:pointer;letter-spacing:0.05em;margin-bottom:10px;box-shadow:0 4px 14px rgba(74,124,107,0.35)">
+      📤 治療院へ送る
     </button>
-
-    <div style="font-size:11px;color:var(--ink-light);text-align:center;margin-bottom:16px">
-      ⚠️ LINEアプリ内では動作しません。Safariで開いてください。
+    <div style="display:flex;gap:8px;margin-bottom:10px">
+      <button onclick="sendLinkViaLINE()" style="flex:1;padding:11px;background:#06C755;color:white;border:none;border-radius:8px;font-family:'Noto Sans JP',sans-serif;font-size:13px;font-weight:700;cursor:pointer">LINEで送る</button>
+      <button onclick="copyLink()" style="flex:1;padding:11px;background:var(--paper-warm);color:var(--ink);border:1px solid var(--border);border-radius:8px;font-family:'Noto Sans JP',sans-serif;font-size:13px;font-weight:700;cursor:pointer">🔗 リンクをコピー</button>
+    </div>
+    <div style="font-size:11px;color:var(--ink-light);text-align:center;line-height:1.7;margin-bottom:16px">
+      リンクには記入内容が含まれます。治療院以外には送らないでください。<br>
+      うまく送れない場合は <a href="#" onclick="exportJSONFromComplete();return false" style="color:var(--ink-light)">JSONファイルで出力</a>
     </div>
 
     <!-- サブアクション -->
@@ -1211,10 +1187,13 @@
     <!-- 患者向けメインアクション：JSON出力を大きく目立たせる -->
     <div style="margin-top:16px;padding:16px;background:var(--green-light);border:1.5px solid var(--green);border-radius:12px;text-align:center">
       <div style="font-size:12px;color:var(--green);font-weight:500;margin-bottom:10px">📋 記入が終わったら治療院へ送信</div>
-      <button onclick="exportJSON()" style="width:100%;padding:14px;background:var(--green);color:white;border:none;border-radius:10px;font-family:'Noto Sans JP',sans-serif;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.05em;">
-        📥 JSONファイルを出力する
+      <button onclick="shareLink()" style="width:100%;padding:14px;background:var(--green);color:white;border:none;border-radius:10px;font-family:'Noto Sans JP',sans-serif;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.05em;">
+        📤 治療院へ送る
       </button>
-      <div style="font-size:11px;color:var(--green);margin-top:8px;opacity:0.8">出力したファイルをLINEで治療院へ送ってください</div>
+      <div style="font-size:11px;color:var(--green);margin-top:8px;opacity:0.8">
+        今の記入内容をリンクにして、LINEやMessengerで送ります<br>
+        <a href="#" onclick="exportJSON();return false" style="color:var(--green)">JSONファイルで出力する</a>
+      </div>
     </div>
 
     <div class="modal-actions" style="margin-top:12px">
@@ -1369,7 +1348,7 @@ function init() {
   // Pre-fill save name
   document.getElementById('save-name').value = new Date().toLocaleDateString('ja-JP');
 
-  loadDraft();
+  if (!loadFromLink()) loadDraft();
 }
 
 // ===== TABS =====
@@ -1469,7 +1448,7 @@ function collectData() {
   ['gender','cohabit','support','smoke','alcohol','marital','course','acup_exp',
    'acup_reaction','acup_current','acup_anxiety','miscarriage','dental_current'
   ].forEach(name => {
-    const el = document.querySelector(`[name="${name}"].selected input`);
+    const el = document.querySelector(`label.radio-label.selected input[name="${name}"]`);
     data[name] = el ? el.value : '';
   });
 
@@ -1588,6 +1567,27 @@ function applyData(data) {
   if (data.delivery) {
     document.querySelectorAll('#delivery-group .check-label input').forEach(inp => {
       if (data.delivery.includes(inp.value)) inp.parentElement.classList.add('selected');
+    });
+  }
+
+  // History rows
+  if (data.past_history) {
+    const rows = document.getElementById('past-history-rows');
+    data.past_history.forEach((h, i) => {
+      if (!rows.children[i]) addHistoryRow('past-history-rows');
+      const inputs = rows.children[i].querySelectorAll('input');
+      inputs[0].value = h.when || '';
+      inputs[1].value = h.condition || '';
+    });
+  }
+  if (data.current_illness) {
+    const rows = document.getElementById('current-illness-rows');
+    data.current_illness.forEach((c, i) => {
+      if (!rows.children[i]) addCurrentRow();
+      const inputs = rows.children[i].querySelectorAll('input');
+      inputs[0].value = c.disease || '';
+      inputs[1].value = c.hospital || '';
+      inputs[2].value = c.medicine || '';
     });
   }
 
@@ -1774,6 +1774,146 @@ function importJSONFile(input) {
   };
   reader.readAsText(file, 'UTF-8');
 }
+
+// ===== リンクで送受信 =====
+// 記入内容を圧縮してURLの「#d=」以降に入れる。#以降はサーバーに送られない。
+function bytesToBase64url(bytes) {
+  let bin = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+function base64urlToBytes(str) {
+  const bin = atob(str.replace(/-/g, '+').replace(/_/g, '/'));
+  return Uint8Array.from(bin, c => c.charCodeAt(0));
+}
+
+async function pipeBytes(bytes, stream) {
+  const writer = stream.writable.getWriter();
+  writer.write(bytes);
+  writer.close();
+  return new Uint8Array(await new Response(stream.readable).arrayBuffer());
+}
+
+function compactData(data) {
+  const out = {};
+  Object.keys(data).forEach(k => {
+    const v = data[k];
+    if (v === '' || v == null || (Array.isArray(v) && v.length === 0)) return;
+    if (k === 'pain_scale' && v === '0') return;
+    out[k] = v;
+  });
+  return out;
+}
+
+async function encodeShareData(data) {
+  const bytes = new TextEncoder().encode(JSON.stringify(compactData(data)));
+  if (typeof CompressionStream !== 'undefined') {
+    return 'z' + bytesToBase64url(await pipeBytes(bytes, new CompressionStream('deflate-raw')));
+  }
+  return 'u' + bytesToBase64url(bytes);
+}
+
+async function decodeShareData(code) {
+  let bytes = base64urlToBytes(code.slice(1));
+  if (code[0] === 'z') bytes = await pipeBytes(bytes, new DecompressionStream('deflate-raw'));
+  return JSON.parse(new TextDecoder().decode(bytes));
+}
+
+async function buildShareLink() {
+  const data = collectData();
+  if (!data.name) {
+    showToast('お名前が未入力です');
+    return null;
+  }
+  data._savedAt = new Date().toISOString();
+  data._saveName = data.name + ' ' + new Date().toLocaleDateString('ja-JP');
+  const base = location.href.split('#')[0].split('?')[0];
+  return { name: data.name, url: base + '#d=' + await encodeShareData(data) };
+}
+
+function shareMessage(link) {
+  return `【問診票】${link.name}さんの問診データです。\nリンクを開くと内容を確認できます。`;
+}
+
+async function shareLink() {
+  const link = await buildShareLink();
+  if (!link) return;
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: '問診票', text: shareMessage(link), url: link.url });
+      return;
+    } catch (e) {
+      if (e.name === 'AbortError') return;
+    }
+  }
+  // 共有メニューが使えない環境ではコピーにする
+  await copyText(shareMessage(link) + '\n' + link.url);
+}
+
+async function sendLinkViaLINE() {
+  const link = await buildShareLink();
+  if (!link) return;
+  location.href = 'https://line.me/R/msg/text/?' + encodeURIComponent(shareMessage(link) + '\n' + link.url);
+}
+
+async function copyLink() {
+  const link = await buildShareLink();
+  if (!link) return;
+  await copyText(shareMessage(link) + '\n' + link.url);
+}
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (e) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    ta.remove();
+  }
+  showToast('📋 コピーしました。LINEやMessengerに貼り付けて送ってください');
+}
+
+function clearForm() {
+  document.querySelectorAll('.tab-panel input[type="text"], .tab-panel input[type="email"], .tab-panel input[type="tel"], .tab-panel input[type="date"], .tab-panel input[type="number"], .tab-panel textarea, .tab-panel select')
+    .forEach(el => { el.value = ''; });
+  document.querySelectorAll('.radio-label.selected, .check-label.selected, .symptom-item.selected, .body-part.selected')
+    .forEach(el => el.classList.remove('selected'));
+  const ps = document.getElementById('pain_scale');
+  ps.value = 0;
+  document.getElementById('pain-display').innerHTML = '0<span>/ 10</span>';
+}
+
+function loadFromLink() {
+  const m = location.hash.match(/^#d=([uz][A-Za-z0-9_-]+)$/);
+  if (!m) return false;
+  // 再読み込みで二重に取り込まないよう、URLから外しておく
+  history.replaceState(null, '', location.href.split('#')[0]);
+  decodeShareData(m[1]).then(data => {
+    clearForm();
+    applyData(data);
+    const records = JSON.parse(localStorage.getItem('monshin_records') || '[]');
+    const exists = records.some(r => r._savedAt === data._savedAt && r.name === data.name);
+    if (!exists) {
+      records.unshift(data);
+      if (records.length > 20) records.splice(20);
+      localStorage.setItem('monshin_records', JSON.stringify(records));
+    }
+    autoSave();
+    goTab(0);
+    showToast(`✓ ${data.name || '問診データ'}さんのデータを読み込みました`);
+  }).catch(() => {
+    loadDraft();
+    showToast('⚠️ リンクのデータを読み込めませんでした');
+  });
+  return true;
+}
+
+// ページを開いたままリンクだけ変わった場合も取り込む
+window.addEventListener('hashchange', loadFromLink);
 
 // ===== QR & LINE =====
 function openQRModal() {
