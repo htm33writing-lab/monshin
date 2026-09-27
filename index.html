@@ -640,6 +640,9 @@
   <button class="tab-btn" data-tab="4" onclick="goTab(4)">体質<span class="check">✓</span></button>
   <button class="tab-btn" data-tab="5" onclick="goTab(5)">症状詳細<span class="check">✓</span></button>
 </nav>
+<div style="text-align:center;padding:7px 16px;font-size:11px;color:var(--ink-light);background:var(--paper-warm);border-bottom:1px solid var(--border);letter-spacing:0.03em">
+  ※ 該当のない項目は飛ばしてください
+</div>
 
 <!-- ===== TAB 0: 基本情報 ===== -->
 <div class="tab-panel active" id="tab-0">
@@ -650,65 +653,73 @@
         <label>お名前<span class="req">必須</span></label>
         <input type="text" id="name" placeholder="山田 花子" oninput="autoSave()">
       </div>
-      <div class="row">
-        <div class="field">
-          <label>性別</label>
-          <div class="radio-group">
-            <label class="radio-label" onclick="selectRadio(this,'gender','男')"><input type="radio" name="gender" value="男">男性</label>
-            <label class="radio-label" onclick="selectRadio(this,'gender','女')"><input type="radio" name="gender" value="女">女性</label>
-          </div>
+      <div class="field">
+        <label>性別</label>
+        <div class="radio-group">
+          <label class="radio-label" onclick="selectRadio(this,'gender','男')"><input type="radio" name="gender" value="男">男性</label>
+          <label class="radio-label" onclick="selectRadio(this,'gender','女')"><input type="radio" name="gender" value="女">女性</label>
         </div>
+      </div>
+      <div class="row">
         <div class="field">
           <label>生年月日</label>
           <input type="date" id="birthdate" oninput="autoSave()">
         </div>
+        <div class="field">
+          <label>生まれた時間</label>
+          <input type="text" id="birth_time" placeholder="例：午前10時30分" oninput="autoSave()">
+        </div>
       </div>
       <div class="field">
-        <label>ご住所</label>
-        <input type="text" id="address" placeholder="東京都〇〇区〇〇" oninput="autoSave()">
+        <label>メールアドレス</label>
+        <input type="text" id="email" placeholder="example@mail.com" oninput="autoSave()">
+      </div>
+      <div class="field">
+        <label>お住まいの郵便番号</label>
+        <input type="text" id="postal_code" placeholder="000-0000" oninput="autoSave()">
+      </div>
+      <div class="field">
+        <label>婚姻状況</label>
+        <div class="radio-group">
+          <label class="radio-label" onclick="selectRadio(this,'marital','既婚')"><input type="radio" name="marital" value="既婚">既婚</label>
+          <label class="radio-label" onclick="selectRadio(this,'marital','未婚')"><input type="radio" name="marital" value="未婚">未婚</label>
+          <label class="radio-label" onclick="selectRadio(this,'marital','それ以外')"><input type="radio" name="marital" value="それ以外">それ以外</label>
+        </div>
       </div>
       <div class="row">
-        <div class="field">
-          <label>自宅電話</label>
-          <input type="text" id="tel_home" placeholder="03-0000-0000" oninput="autoSave()">
-        </div>
         <div class="field">
           <label>携帯電話</label>
           <input type="text" id="tel_mobile" placeholder="090-0000-0000" oninput="autoSave()">
-        </div>
-      </div>
-      <div class="row">
-        <div class="field">
-          <label>同居の方</label>
-          <div class="radio-group">
-            <label class="radio-label" onclick="selectRadio(this,'cohabit','はい')"><input type="radio" name="cohabit" value="はい">いる</label>
-            <label class="radio-label" onclick="selectRadio(this,'cohabit','いいえ')"><input type="radio" name="cohabit" value="いいえ">いない</label>
-          </div>
         </div>
         <div class="field">
           <label>ご職業</label>
           <input type="text" id="occupation" placeholder="会社員" oninput="autoSave()">
         </div>
       </div>
+      <div class="field">
+        <label>同居の方</label>
+        <div class="radio-group">
+          <label class="radio-label" onclick="selectRadio(this,'cohabit','はい')"><input type="radio" name="cohabit" value="はい">いる</label>
+          <label class="radio-label" onclick="selectRadio(this,'cohabit','いいえ')"><input type="radio" name="cohabit" value="いいえ">いない</label>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-header"><span class="section-icon">🍶</span><span class="section-title">身体情報・嗜好</span></div>
+    <div class="section-header"><span class="section-icon">🍶</span><span class="section-title">嗜好・食品</span></div>
     <div class="section-body">
-      <div class="row">
-        <div class="field">
-          <label>身長</label>
-          <input type="number" id="height" placeholder="cm" oninput="autoSave()">
+      <div class="field">
+        <label>毎日意識して摂っている食品（複数選択可）</label>
+        <div class="check-group" id="daily-foods-group">
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="コーヒー">コーヒー</label>
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="紅茶">紅茶</label>
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="緑茶">緑茶</label>
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="甘い飲み物">甘い飲み物</label>
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="ヨーグルト">ヨーグルト</label>
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="納豆">納豆</label>
         </div>
-        <div class="field">
-          <label>体重</label>
-          <input type="number" id="weight" placeholder="kg" oninput="autoSave()">
-        </div>
-        <div class="field">
-          <label>体温（平熱）</label>
-          <input type="number" id="temp" placeholder="℃" step="0.1" oninput="autoSave()">
-        </div>
+        <input type="text" id="daily_foods_other" placeholder="その他（食品名、サプリ名など）" style="margin-top:8px" oninput="autoSave()">
       </div>
       <div class="field">
         <label>たばこ</label>
@@ -741,12 +752,10 @@
     <div class="section-body">
       <div class="field">
         <div class="check-group" id="referral-group">
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="HP">HP</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="検索サイト">検索サイト</label>
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="SNS（Facebook・Instagram）">SNS（Facebook・Instagram）</label>
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="Webページ">Webページ</label>
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="Web広告">Web広告</label>
           <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="口コミ">口コミ</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="テレビ・雑誌">テレビ・雑誌</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="通りすがり">通りすがり</label>
-          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="医師紹介">医師紹介</label>
           <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="家族・知人紹介">家族・知人紹介</label>
         </div>
         <input type="text" id="referral_other" placeholder="その他" style="margin-top:8px" oninput="autoSave()">
@@ -977,6 +986,30 @@
       </div>
     </div>
   </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-icon">🦷</span><span class="section-title">歯の治療について</span></div>
+    <div class="section-body">
+      <div class="field">
+        <label>現在の歯の治療状況</label>
+        <div class="radio-group">
+          <label class="radio-label" onclick="selectRadio(this,'dental_current','今はしていない')"><input type="radio" name="dental_current" value="今はしていない">今はしていない</label>
+          <label class="radio-label" onclick="selectRadio(this,'dental_current','定期メンテのみ')"><input type="radio" name="dental_current" value="定期メンテのみ">定期メンテのみ</label>
+          <label class="radio-label" onclick="selectRadio(this,'dental_current','虫歯治療中')"><input type="radio" name="dental_current" value="虫歯治療中">虫歯治療中</label>
+          <label class="radio-label" onclick="selectRadio(this,'dental_current','矯正中')"><input type="radio" name="dental_current" value="矯正中">矯正中</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>受けたことのある治療（複数選択可）</label>
+        <div class="check-group" id="dental-history-group">
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="歯の矯正">歯の矯正</label>
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="顎の矯正">顎の矯正</label>
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="顎関節症の治療">顎関節症の治療</label>
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="インプラント">インプラント</label>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ===== TAB 4: 体質 ===== -->
@@ -1013,12 +1046,70 @@
   <div class="section" id="female-section">
     <div class="section-header"><span class="section-icon">🌸</span><span class="section-title">女性の方のみ</span></div>
     <div class="section-body">
-      <div class="symptom-grid" id="female-symptoms-grid"></div>
-      <div class="row" style="margin-top:12px">
+
+      <!-- 基本 -->
+      <div class="row">
         <div class="field"><label>初潮（歳）</label><input type="number" id="menarche" oninput="autoSave()"></div>
         <div class="field"><label>閉経（歳）</label><input type="number" id="menopause" oninput="autoSave()"></div>
         <div class="field"><label>出産回数</label><input type="number" id="births" oninput="autoSave()"></div>
       </div>
+
+      <!-- 流産 -->
+      <div class="field" style="margin-top:12px">
+        <label>流産の経験</label>
+        <div class="radio-group">
+          <label class="radio-label" onclick="selectRadio(this,'miscarriage','無')"><input type="radio" name="miscarriage" value="無">無</label>
+          <label class="radio-label" onclick="selectRadio(this,'miscarriage','有')"><input type="radio" name="miscarriage" value="有">有</label>
+        </div>
+        <input type="text" id="miscarriage_age" placeholder="有の方：何歳ごろか" style="margin-top:8px" oninput="autoSave()">
+      </div>
+
+      <!-- 分娩方法 -->
+      <div class="field">
+        <label>出産ありの方のみ：分娩方法（複数選択可）</label>
+        <div class="check-group" id="delivery-group">
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="自然分娩">自然分娩</label>
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="無痛分娩">無痛分娩</label>
+          <label class="check-label" onclick="toggleCheck(this)"><input type="checkbox" value="帝王切開">帝王切開</label>
+        </div>
+      </div>
+
+      <!-- 初〜中期 -->
+      <div class="symptom-subgroup" style="margin-top:14px">
+        <div class="symptom-subgroup-title">初〜中期の月経の状況（10〜20代）</div>
+        <div class="symptom-grid" id="female-young-grid">
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理不順（遅い）_若"><div class="symptom-dot"></div><span>生理不順（遅い）</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理不順（早い）_若"><div class="symptom-dot"></div><span>生理不順（早い）</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理不順（不規則）_若"><div class="symptom-dot"></div><span>生理不順（不規則）</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理痛（腹）_若"><div class="symptom-dot"></div><span>生理痛（腹）</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理痛（腰）_若"><div class="symptom-dot"></div><span>生理痛（腰）</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理痛（頭）_若"><div class="symptom-dot"></div><span>生理痛（頭）</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理前のイライラ_若"><div class="symptom-dot"></div><span>生理前のイライラ</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理前のむくみ_若"><div class="symptom-dot"></div><span>生理前のむくみ</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理前の痛み_若"><div class="symptom-dot"></div><span>生理前の痛み</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="おりもの・帯下あり_若"><div class="symptom-dot"></div><span>おりもの・帯下あり</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="不正出血_若"><div class="symptom-dot"></div><span>不正出血</span></div>
+        </div>
+      </div>
+
+      <!-- 更年期 -->
+      <div class="symptom-subgroup" style="margin-top:14px">
+        <div class="symptom-subgroup-title">更年期の月経の状況（30代後半〜50代）</div>
+        <div class="symptom-grid" id="female-mature-grid">
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理不順（遅い）_更"><div class="symptom-dot"></div><span>生理不順（遅い）</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理不順（早い）_更"><div class="symptom-dot"></div><span>生理不順（早い）</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理不順（不規則）_更"><div class="symptom-dot"></div><span>生理不順（不規則）</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理痛（腹）_更"><div class="symptom-dot"></div><span>生理痛（腹）</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理痛（腰）_更"><div class="symptom-dot"></div><span>生理痛（腰）</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理痛（頭）_更"><div class="symptom-dot"></div><span>生理痛（頭）</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理前のイライラ_更"><div class="symptom-dot"></div><span>生理前のイライラ</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理前のむくみ_更"><div class="symptom-dot"></div><span>生理前のむくみ</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="生理前の痛み_更"><div class="symptom-dot"></div><span>生理前の痛み</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="おりもの・帯下あり_更"><div class="symptom-dot"></div><span>おりもの・帯下あり</span></div>
+          <div class="symptom-item" onclick="this.classList.toggle('selected');autoSave()"><input type="checkbox" value="不正出血_更"><div class="symptom-dot"></div><span>不正出血</span></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -1042,6 +1133,69 @@
       <button class="btn-close-modal" onclick="closeModal('save-modal')">キャンセル</button>
       <button class="btn-download" onclick="saveToStorage()">保存する</button>
     </div>
+  </div>
+</div>
+
+<!-- ===== 送信完了モーダル ===== -->
+<div class="modal-overlay" id="complete-modal" style="align-items:center">
+  <div class="modal" style="border-radius:16px;max-height:90vh;overflow-y:auto">
+
+    <!-- 完了ヘッダー -->
+    <div style="text-align:center;padding:8px 0 20px">
+      <div style="font-size:48px;margin-bottom:10px">✅</div>
+      <h2 style="font-size:20px;margin-bottom:6px">記入が完了しました！</h2>
+      <p style="font-size:13px;color:var(--ink-light);line-height:1.7">
+        次のステップでファイルを出力して<br>治療院へ送信してください
+      </p>
+    </div>
+
+    <!-- ステップ -->
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--paper-warm);border-radius:10px;border:1px solid var(--border)">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">1</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:2px">下のボタンでファイルを出力</div>
+          <div style="font-size:12px;color:var(--ink-light)">「📥 JSONファイルを出力する」をタップすると、ファイルが作成されます</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--paper-warm);border-radius:10px;border:1px solid var(--border)">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">2</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:2px">「ダウンロード」をタップして保存</div>
+          <div style="font-size:12px;color:var(--ink-light)">iPhoneの場合、確認画面が出たら「ダウンロード」を選んでください</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--paper-warm);border-radius:10px;border:1px solid var(--border)">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">3</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:2px">LINEで治療院へ送信</div>
+          <div style="font-size:12px;color:var(--ink-light)">LINEを開いて「＋」→「ファイル」→ ダウンロードしたファイルを選んで送信</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- メインボタン：JSON出力 -->
+    <button onclick="exportJSONFromComplete()" style="width:100%;padding:16px;background:var(--green);color:white;border:none;border-radius:12px;font-family:'Noto Sans JP',sans-serif;font-size:17px;font-weight:700;cursor:pointer;letter-spacing:0.05em;margin-bottom:10px;box-shadow:0 4px 14px rgba(74,124,107,0.35)">
+      📥 JSONファイルを出力する
+    </button>
+
+    <div style="font-size:11px;color:var(--ink-light);text-align:center;margin-bottom:16px">
+      ⚠️ LINEアプリ内では動作しません。Safariで開いてください。
+    </div>
+
+    <!-- サブアクション -->
+    <div style="display:flex;gap:8px">
+      <button onclick="closeModal('complete-modal')" style="flex:1;padding:11px;background:var(--paper-warm);color:var(--ink-light);border:1px solid var(--border);border-radius:8px;font-family:'Noto Sans JP',sans-serif;font-size:13px;cursor:pointer">
+        フォームに戻る
+      </button>
+      <button onclick="printPDF();closeModal('complete-modal')" style="flex:1;padding:11px;background:var(--ink);color:white;border:none;border-radius:8px;font-family:'Noto Sans JP',sans-serif;font-size:13px;cursor:pointer">
+        🖨️ 印刷する
+      </button>
+    </div>
+
   </div>
 </div>
 
@@ -1177,12 +1331,7 @@ const detailSymptomGroups = [
   { title: '消化器・泌尿器', items: ['下痢','便秘','便意を頻繁に催す','食欲不振','食欲亢進','痔（痛み・出血・腫れ）','頻尿','尿が出にくい'] },
 ];
 
-const femaleSymptoms = [
-  '生理不順（遅い）','生理不順（早い）','生理不順（不規則）',
-  '生理痛（腹）','生理痛（腰）','生理痛（頭）',
-  '生理前のイライラ','生理前のむくみ','生理前の痛み',
-  'おりもの・帯下あり','不正出血'
-];
+// 女性症状はHTML静的に定義済み
 
 // ===== INIT =====
 function init() {
@@ -1215,15 +1364,7 @@ function init() {
     dc.appendChild(sg);
   });
 
-  // Female symptoms
-  const fg = document.getElementById('female-symptoms-grid');
-  femaleSymptoms.forEach(item => {
-    const el = document.createElement('div');
-    el.className = 'symptom-item';
-    el.innerHTML = `<input type="checkbox" value="${item}"><div class="symptom-dot"></div><span>${item}</span>`;
-    el.onclick = () => { el.classList.toggle('selected'); autoSave(); };
-    fg.appendChild(el);
-  });
+  // 女性症状はHTMLに静的定義済みのためJS生成不要
 
   // Pre-fill save name
   document.getElementById('save-name').value = new Date().toLocaleDateString('ja-JP');
@@ -1251,7 +1392,7 @@ function updateNav() {
   const next = document.getElementById('btn-next');
   prev.style.display = currentTab === 0 ? 'none' : 'block';
   if (currentTab === totalTabs - 1) {
-    next.textContent = '完了・保存 ✓';
+    next.textContent = '完了・送信 ✓';
     next.className = 'btn-save';
     next.onclick = openSaveModal;
   } else {
@@ -1309,23 +1450,24 @@ function collectData() {
   const data = {};
 
   // Simple inputs
-  ['name','birthdate','address','tel_home','tel_mobile','occupation',
-   'height','weight','temp','smoke_detail','alcohol_detail',
+  ['name','birthdate','birth_time','email','postal_code',
+   'tel_mobile','occupation',
+   'smoke_detail','alcohol_detail','daily_foods_other',
    'complaint1','complaint2','complaint3','complaint4','complaint5',
    'onset_when','onset_cause','worse_when','better_when','accompanying',
    'prev_treatment','other_concerns',
    'fam_diabetes','fam_cancer','fam_hypertension','fam_stroke','fam_heart',
    'fam_lipid','fam_kidney','fam_allergy','fam_liver','fam_alcohol',
    'fam_mental','fam_thyroid','fam_same','fam_other',
-   'menarche','menopause','births','referral_other'
+   'menarche','menopause','births','miscarriage_age','referral_other'
   ].forEach(id => {
     const el = document.getElementById(id);
     if (el) data[id] = el.value;
   });
 
   // Radios
-  ['gender','cohabit','support','smoke','alcohol','course','acup_exp',
-   'acup_reaction','acup_current','acup_anxiety'
+  ['gender','cohabit','support','smoke','alcohol','marital','course','acup_exp',
+   'acup_reaction','acup_current','acup_anxiety','miscarriage','dental_current'
   ].forEach(name => {
     const el = document.querySelector(`[name="${name}"].selected input`);
     data[name] = el ? el.value : '';
@@ -1340,6 +1482,9 @@ function collectData() {
   // Checkboxes
   data.referral = [...document.querySelectorAll('#referral-group .check-label.selected input')].map(e => e.value);
   data.acup_reaction_detail = [...document.querySelectorAll('#acup-reaction-group .check-label.selected input')].map(e => e.value);
+  data.daily_foods = [...document.querySelectorAll('#daily-foods-group .check-label.selected input')].map(e => e.value);
+  data.dental_history = [...document.querySelectorAll('#dental-history-group .check-label.selected input')].map(e => e.value);
+  data.delivery = [...document.querySelectorAll('#delivery-group .check-label.selected input')].map(e => e.value);
 
   // Constitution
   data.constitution = [...document.querySelectorAll('#constitution-grid .symptom-item.selected input')].map(e => e.value);
@@ -1348,7 +1493,8 @@ function collectData() {
   data.detail_symptoms = [...document.querySelectorAll('#detail-symptoms-container .symptom-item.selected input')].map(e => e.value);
 
   // Female
-  data.female_symptoms = [...document.querySelectorAll('#female-symptoms-grid .symptom-item.selected input')].map(e => e.value);
+  data.female_symptoms_young = [...document.querySelectorAll('#female-young-grid .symptom-item.selected input')].map(e => e.value);
+  data.female_symptoms_mature = [...document.querySelectorAll('#female-mature-grid .symptom-item.selected input')].map(e => e.value);
 
   // Past history
   data.past_history = [];
@@ -1392,8 +1538,8 @@ function applyData(data) {
   });
 
   // Radios
-  ['gender','cohabit','support','smoke','alcohol','course','acup_exp',
-   'acup_reaction','acup_current','acup_anxiety'
+  ['gender','cohabit','support','smoke','alcohol','marital','course','acup_exp',
+   'acup_reaction','acup_current','acup_anxiety','miscarriage','dental_current'
   ].forEach(name => {
     if (data[name]) {
       const el = document.querySelector(`[name="${name}"] + input[value="${data[name]}"], label.radio-label:has(input[name="${name}"][value="${data[name]}"])`);
@@ -1429,6 +1575,21 @@ function applyData(data) {
       if (data.acup_reaction_detail.includes(inp.value)) inp.parentElement.classList.add('selected');
     });
   }
+  if (data.daily_foods) {
+    document.querySelectorAll('#daily-foods-group .check-label input').forEach(inp => {
+      if (data.daily_foods.includes(inp.value)) inp.parentElement.classList.add('selected');
+    });
+  }
+  if (data.dental_history) {
+    document.querySelectorAll('#dental-history-group .check-label input').forEach(inp => {
+      if (data.dental_history.includes(inp.value)) inp.parentElement.classList.add('selected');
+    });
+  }
+  if (data.delivery) {
+    document.querySelectorAll('#delivery-group .check-label input').forEach(inp => {
+      if (data.delivery.includes(inp.value)) inp.parentElement.classList.add('selected');
+    });
+  }
 
   // Constitution & symptoms (wait for DOM)
   setTimeout(() => {
@@ -1442,9 +1603,14 @@ function applyData(data) {
         if (data.detail_symptoms.includes(inp.value)) inp.parentElement.classList.add('selected');
       });
     }
-    if (data.female_symptoms) {
-      document.querySelectorAll('#female-symptoms-grid .symptom-item input').forEach(inp => {
-        if (data.female_symptoms.includes(inp.value)) inp.parentElement.classList.add('selected');
+    if (data.female_symptoms_young) {
+      document.querySelectorAll('#female-young-grid .symptom-item input').forEach(inp => {
+        if (data.female_symptoms_young.includes(inp.value)) inp.parentElement.classList.add('selected');
+      });
+    }
+    if (data.female_symptoms_mature) {
+      document.querySelectorAll('#female-mature-grid .symptom-item input').forEach(inp => {
+        if (data.female_symptoms_mature.includes(inp.value)) inp.parentElement.classList.add('selected');
       });
     }
   }, 100);
@@ -1471,7 +1637,19 @@ function saveToStorage() {
   localStorage.setItem('monshin_records', JSON.stringify(records));
 
   closeModal('save-modal');
-  showToast('✓ 保存しました');
+
+  // 最終タブからの保存なら送信モーダルを表示、それ以外はトースト
+  if (currentTab === totalTabs - 1) {
+    setTimeout(() => {
+      document.getElementById('complete-modal').classList.add('open');
+    }, 200);
+  } else {
+    showToast('✓ 保存しました');
+  }
+}
+
+function exportJSONFromComplete() {
+  exportJSON();
 }
 
 function openLoadModal() {
